@@ -187,8 +187,19 @@
                     <p>Relocating to <strong>Dubai, UAE</strong></p>
                     
                     <div class="sidebar-links">
-                        <a href="mailto:pierrelalliot@gmail.com" class="btn-primary">📧 Email Me</a>
-                        <a href="https://www.linkedin.com/in/pierre-lalliot/" target="_blank" class="btn-secondary">
+                        <a href="mailto:pierrelalliot@gmail.com" 
+                            onclick="window.dataLayer.push({
+                                'event': 'cta_click',
+                                'cta_name': 'email',
+                                'cta_location': 'sidebar'
+                            });" class="btn-primary">📧 Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/pierre-lalliot/" target="_blank" 
+                            onclick="window.dataLayer.push({
+                                'event': 'cta_click',
+                                'cta_name': 'linkedin',
+                                'cta_location': 'sidebar'
+                            });" class="btn-secondary">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </a>
                         <a href="https://wa.me/14384047543" target="_blank" class="whatsapp-link">
@@ -199,8 +210,16 @@
             </aside>
             
             <div class="mobile-cta-bar">
-                <button onclick="toggleDrawer()" class="mobile-btn">📩 Contact Me</button>
-                <button onclick="openAI()" class="mobile-btn chat-btn">🤖 Ask AI-Me</button>
+                <button onclick="window.dataLayer.push({
+                    'event': 'cta_click',
+                    'cta_name': 'contact_me',
+                    'cta_location': 'mobile_bar'
+                }); toggleDrawer();" class="mobile-btn">📩 Contact Me</button>
+                <button onclick="window.dataLayer.push({
+                    'event': 'cta_click',
+                    'cta_name': 'ai_chat',
+                    'cta_location': 'mobile_bar'
+                }); openAI();" class="mobile-btn chat-btn">🤖 Ask AI-Me</button>
             </div>
 
         </main>
