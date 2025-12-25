@@ -215,29 +215,34 @@
                     'cta_name': 'contact_me',
                     'cta_location': 'mobile_bar'
                 }); toggleDrawer();" class="mobile-btn">📩 Contact Me</button>
-                <button onclick="window.dataLayer.push({
-                    'event': 'cta_click',
-                    'cta_name': 'ai_chat',
-                    'cta_location': 'mobile_bar'
-                }); openAI();" class="mobile-btn chat-btn">🤖 Ask AI-Me</button>
+                <button onclick="openAI();" class="mobile-btn chat-btn">🤖 Ask AI-Me</button>
             </div>
 
         </main>
         
         <div id="voiceflow-container">
             <script type="text/javascript">
-                // Voiceflow agent integration script
                 (function(d, t) {
                     var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
                     v.onload = function() {
-                    window.voiceflow.chat.load({
-                        verify: { projectID: '693f0b3cb5e9def47fbab88a' },
-                        url: 'https://general-runtime.voiceflow.com',
-                        versionID: 'production',
-                        voice: {
-                        url: "https://runtime-api.voiceflow.com"
-                        }
-                    });
+                        window.voiceflow.chat.load({
+                            verify: { projectID: '693f0b3cb5e9def47fbab88a' },
+                            url: 'https://general-runtime.voiceflow.com',
+                            versionID: 'production',
+                            voice: {
+                                url: "https://runtime-api.voiceflow.com"
+                            }
+                        }).then(() => {
+                            // This listener ensures we capture the event regardless 
+                            // of which button (mobile or widget bubble) opened the chat.
+                            window.voiceflow.chat.on('open', function() {
+                                window.dataLayer.push({
+                                    'event': 'cta_click',
+                                    'cta_name': 'ai_chat_opened',
+                                    'cta_location': 'voiceflow_widget'
+                                });
+                            });
+                        });
                     }
                     v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
                 })(document, 'script');
