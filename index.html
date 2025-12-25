@@ -259,9 +259,16 @@
             // 2. Logic to force open the AI Chat
             function openAI() {
                 if (window.voiceflow && window.voiceflow.chat) {
-                    // We force the chat to show even if the launcher is hidden
-                    window.voiceflow.chat.show(); // Ensures the widget is "on"
-                    window.voiceflow.chat.open(); // Opens the window
+                    // First, we push the data to GTM
+                    window.dataLayer.push({
+                        'event': 'cta_click',
+                        'cta_name': 'ai_chat_opened',
+                        'cta_location': 'manual_trigger'
+                    });
+                    
+                    // Then, we open the chat
+                    window.voiceflow.chat.show();
+                    window.voiceflow.chat.open();
                 }
             }
         </script>
